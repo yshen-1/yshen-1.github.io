@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>LED Photometry (Inspired from Forrest Mims’s Work)</title>
+
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Yuyi Shen</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Projects
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="electronics.html">Electronics</a>
+    </li>
+    <li>
+      <a href="programming.html">Programming</a>
+    </li>
+    <li>
+      <a href="sciences.html">General Sciences</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="links.html">Interesting Links</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">LED Photometry (Inspired from Forrest Mims’s Work)</h1>
+
+</div>
+
+
+<hr />
+<div id="page-summary" class="section level1">
+<h1>Page Summary</h1>
+<p>This page serves to document my forays into optical photometry based on the works of Forrest Mims. Most of this information is taken from the book <code>Atmospheric Monitoring with Arduino</code>.</p>
+<hr />
+</div>
+<div id="inventory-of-available-leds" class="section level1">
+<h1>Inventory of Available LEDs</h1>
+<ul>
+<li>660 nm red LED (5)</li>
+<li>RGB LED (2)</li>
+<li>522 nm green LED (5)</li>
+<li>470 nm blue LED (5)</li>
+<li>605 nm orange LED (5)</li>
+<li>589 nm yellow LED (5)</li>
+<li>940 nm IR LED (5)</li>
+<li>875 nm IR LED (3)</li>
+</ul>
+<hr />
+</div>
+<div id="led-characterization" class="section level1">
+<h1>LED Characterization</h1>
+<div id="procedure" class="section level2">
+<h2>Procedure</h2>
+<ol style="list-style-type: decimal">
+<li>Sweep RGB LED color throughout entire range available with ATTINY85 and PWM or Arduino Uno.</li>
+<li>Record LED output with ADC/integrating counter vs. color.</li>
+<li>Plot to determine peak of response.</li>
+</ol>
+<hr />
+</div>
+</div>
+<div id="photocurrent-measurement-technique-tdc" class="section level1">
+<h1>Photocurrent measurement technique (TDC)</h1>
+<div id="front-end" class="section level2">
+<h2>Front End</h2>
+<center>
+<img src="photometry-images/afe.png" id="id" class="class" style="width:50.0%;height:50.0%" />
+</center>
+<p>The above is a parasitic-insensitive offset voltage canceling charge sensitive detector. When CLK2 is high, the charge on the cap is reset to <span class="math inline">\(-C_{int}V_{off}\)</span>. When CLK1 is high, this initial charge is canceled out and the output voltage is:</p>
+<p><span class="math display">\[V_{out}=\frac{I_{photocurrent}}{C_{int}}t\]</span> The parasitic capacitance at the op-amp inverting input has a negligible effect, and any random offset from the op-amp is canceled out.</p>
+<p>This circuit requires two non-overlapping clocks. The below generator using a hex inverter and 2 nor gates (try the 7432 IC) can be used:</p>
+<center>
+<img src="photometry-images/clockgen.png" id="id" class="class" style="width:50.0%;height:50.0%" />
+</center>
+<p>Otherwise, non-overlapping slow clocks can be generated with the ATTINY85.</p>
+<p>The switches can be implemented with the CD4016B IC.</p>
+</div>
+<div id="tdc-backend" class="section level2">
+<h2>TDC Backend</h2>
+<center>
+<img src="photometry-images/tdc.png" id="id" class="class" style="width:50.0%;height:50.0%" />
+</center>
+<p>The output voltage from the analog front end is fed into the inverting input of the comparator and used to enable a ring oscillator whose edges are counted by an ATTINY85. The capacitor <span class="math inline">\(C_h\)</span> is simply present to hold the inverting input voltage at ground when CLK2 and CLK1 are both low, and the REF is simply a voltage reference IC. The rising edge of CLK2 serves as a valid signal for the ATTINY85 counter.</p>
+<hr />
+</div>
+</div>
+<div id="photometer-calibration" class="section level1">
+<h1>Photometer Calibration</h1>
+<p>Since the photometer sensor is meant to be pointed directly at the Sun during measurements, it may help to build aligning tools into the photometer casing. Otherwise, stick to noon measurements when the Sun is highest. Make sure to record the time of measurements.</p>
+<div id="intuition" class="section level2">
+<h2>Intuition</h2>
+<p>The specific position of the Sun at noon changes as the Earth orbits the Sun. B/c the sunlight is passing through a different amount of air mass at different points in the year, photometric measurements are significantly impacted.</p>
+<p>Air mass is simply defined as: <span class="math inline">\(m = 1/sin(theta)\)</span> where theta is the angle of the sun above the horizon. This quantity can be calculated from location and time, or directly measured with a clinometer.</p>
+<p>The change in air mass over the course of the year can be de-embedded by calculating the atmospheric optical thickness (AOT). AOT gives the air clarity for any given air mass (the true reading of the Photometer) and can be found with Langley extrapolation.</p>
+</div>
+<div id="procedure-1" class="section level2">
+<h2>Procedure</h2>
+<ol style="list-style-type: decimal">
+<li>Wait for a very clear day (constant humidity, no cloud cover, no atmospheric haze). Alternatively, wait for an overcast day with uniform cloud cover.</li>
+<li>Take measurements every half hour for half of the daylight hours (dawn to noon or noon to sunset).</li>
+<li>Measure the sun’s angle above the horizon at each measurement.</li>
+<li>Plot the log of the LED data on the y-axis against the air mass on the x-axis.</li>
+<li>Extrapolate linearly to find the y-intercept where the airmass is zero, the extraterrestrial constant (EC).</li>
+<li>The EC serves as a calibration constant specific to the photometer.</li>
+<li>Calculate AOT using the EC:</li>
+</ol>
+<p><span class="math display">\[AOT = (log(EC)/log(LED data))\times\frac{1}{m}\]</span></p>
+<hr />
+</div>
+</div>
+<div id="applications-of-available-leds" class="section level1">
+<h1>Applications of Available LEDs</h1>
+<hr />
+</div>
+<div id="ozone-detection" class="section level1">
+<h1>Ozone Detection</h1>
+<center>
+<img src="photometry-images/ozoneabsorptionspectrum.png" id="id" class="class" style="width:50.0%;height:50.0%" />
+</center>
+<div id="required-leds" class="section level2">
+<h2>Required LEDs</h2>
+<ul>
+<li>589 nm yellow LED</li>
+<li>660 nm red LED</li>
+</ul>
+<p>Taking the ratio of the readings from these two LEDs (one with a response near the Chappuis band, and one with a peak freq. above it) gives ambient ozone.</p>
+<hr />
+</div>
+</div>
+<div id="twilight-haze-measurement" class="section level1">
+<h1>Twilight Haze Measurement</h1>
+<ul>
+<li>requires 660 nm or 880 nm LED</li>
+</ul>
+<div id="measurement-procedure" class="section level2">
+<h2>Measurement Procedure</h2>
+<ol style="list-style-type: decimal">
+<li>10 minutes before sunset or 45 minutes before sunrise on a clear day, lay the photometer facing straight up on a level surface outdoors away from light sources.</li>
+<li>Record data at 1-second intervals.</li>
+</ol>
+<div id="caveats" class="section level3">
+<h3>Caveats</h3>
+<ol style="list-style-type: decimal">
+<li>The photometer needs a large dynamic range!</li>
+</ol>
+</div>
+</div>
+<div id="data-processing-procedures" class="section level2">
+<h2>Data Processing Procedures</h2>
+<div id="intuition-1" class="section level3">
+<h3>Intuition</h3>
+<p>The “twilight intensity” measured at any given time by the photometer correlates with the “height” of Earth’s shadow. For the sunset measurement case, the photometer measures the reduction in light as the sun sinks below the horizon. The reverse is true for the sunrise measurement.</p>
+<p>The height of Earth’s shadow can be calculated from your location and elevation at any given time. Plotting this on the y-axis against the intensity measured by the photometer gives an idea of the heights at which there are significant concentrations of aerosols with dips in the measured intensity. Taking the derivative of the intensity before plotting serves to emphasize seemingly insignificant changes.</p>
+</div>
+</div>
+<div id="reference" class="section level2">
+<h2><a href="https://makezine.com/projects/twilight-photometer">Reference</a></h2>
+</div>
+</div>
+<div id="atmospheric-haze" class="section level1">
+<h1>Atmospheric Haze</h1>
+<ul>
+<li>red LED</li>
+<li>green LED Atmospheric haze is produced by aerosols, which scatter higher frequencies of light more effectively than lower frequencies.</li>
+</ul>
+<p>Therefore, the difference between the photocurrent of the red and green LEDs should give the amount of haze that day. The green LED will generate less photocurrent when there is more haze.</p>
+</div>
+<div id="photosynthetically-active-radiation" class="section level1">
+<h1>Photosynthetically Active Radiation</h1>
+<ul>
+<li>Blue LED</li>
+<li>Red LED</li>
+</ul>
+<p>Photosynthetically active radiation (PAR) refers to red or blue light that is used for photosynthesis. Summing the readings from the blue and red LED gives the amount of PAR available on a given day.</p>
+</div>
+<div id="water-vapor-wv" class="section level1">
+<h1>Water vapor (WV)</h1>
+<ul>
+<li>940 nm LED</li>
+<li>880 nm LED
+<center>
+<img src="photometry-images/waterabsorptionspectrum.png" id="id" class="class" style="width:50.0%;height:50.0%" /> DOI: 10.1560/IJPS.60.1-2.9
+</center></li>
+</ul>
+<p>Water vapor has an absorption band around 940 nm (see above). Comparing the output of the 940 nm LED with the 880 nm LED gives the amount of WV in the atmosphere. B/c of the high dependence of WV on local weather (clouds, raining, snowing), better results can be obtained for measurements of upper atmospheric water vapor (above the weather) on clear days.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

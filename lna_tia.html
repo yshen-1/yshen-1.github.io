@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>A Low Noise Audio TIA</title>
+
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Yuyi Shen</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Projects
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="electronics.html">Electronics</a>
+    </li>
+    <li>
+      <a href="programming.html">Programming</a>
+    </li>
+    <li>
+      <a href="sciences.html">General Sciences</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="links.html">Interesting Links</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">A Low Noise Audio TIA</h1>
+
+</div>
+
+
+<hr />
+<div id="motivation" class="section level1">
+<h1>Motivation</h1>
+<p>This is the 1st revision of the TIA circuit that was used with the field mill sensor described <a href="fieldmill.html">here</a>.</p>
+<hr />
+</div>
+<div id="device-selection" class="section level1">
+<h1>Device Selection</h1>
+<p>A 2SC2714-O NPN transistor was selected as the gain element of the transimpedance stage, mainly for its 2.5 dB noise figure (measured at 100 MHz, Ie = 1 mA).</p>
+<div id="part-statistics" class="section level3">
+<h3>Part Statistics</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Number</th>
+<th>Max Vce (V)</th>
+<th>Ft (MHz)</th>
+<th>Max Ic (mA)</th>
+<th>Min hFE</th>
+<th>Max hFE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2SC2714-O</td>
+<td>30</td>
+<td>550</td>
+<td>20</td>
+<td>70</td>
+<td>140</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="spice-model" class="section level3">
+<h3>SPICE Model</h3>
+<pre><code>.MODEL 2SC2714 NPN( IS=1.45E-15 BF=166 NF=1.00 VAF=71 IKF=49E-3 ISE=43E-15 NE=2.45
+BR=5.33 NR=997E-3 VAR=22 IKR=69E-3 ISC=847E-18 NC=1.02 RB=14 IRB=1.00E-6 RBM=14
+RE=46E-3 RC=9.17 XTB=0.00 EG=1.11 eV XTI=3.00 CJE=1.66E-12 VJE=717E-3 MJE=331E-3
+TF=153E-12 XTF=100 VTF=383E-3 ITF=90E-3 PTF=47 CJC=781E-15 VJC=630E-3 MJC=462E-3
+XCJC=1.00 TR=1.00E-6 FC=900E-3)</code></pre>
+</div>
+<div id="bias-point" class="section level3">
+<h3>Bias Point</h3>
+Assume a Vcc of 3.3 V, for compatibility with 1.5 V and 3.6 V battery cells. Choose Vce = 2 V, Ic = 1 mA for an approximate 2 Vpp output swing and a low noise figure (the BJT only seems to be specified for Ic = 1 mA in the datasheet). The collector-feedback bias circuit needed to achieve this (as calculated in AppCad) is:
+<center>
+<img src="tia-images/bias.png" id="id" class="class" style="width:75.0%;height:75.0%" />
+</center>
+<hr />
+</div>
+</div>
+<div id="circuit-topology-small-signal-analysis" class="section level1">
+<h1>Circuit Topology Small Signal Analysis</h1>
+<div id="bjt-hybrid-pi-model" class="section level3">
+<h3>BJT Hybrid Pi Model</h3>
+<table>
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Ic (mA)</th>
+<th>Ft (MHz)</th>
+<th>gm (mOhms^-1)</th>
+<th>Cpi (pF)</th>
+<th>Min hFE</th>
+<th>Max hFE</th>
+<th>Min Rpi (Ohms)</th>
+<th>Max Rpi (Ohms)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>550</td>
+<td>38.4</td>
+<td>11</td>
+<td>70</td>
+<td>140</td>
+<td>1822</td>
+<td>3645</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="circuit-topology" class="section level3">
+<h3>Circuit Topology</h3>
+Assume a shunt-feedback topology for convenience:
+<center>
+<img src="tia-images/circuit.png" id="id" class="class" style="width:50.0%;height:50.0%" />
+</center>
+<p>The DC gain is: <span class="math display">\[\frac{V_o}{V_i}=\frac{G_f-g_m}{G_f+G_l}\]</span> The input resistance is: <span class="math display">\[R_{in}=\frac{R_{\pi}}{1+R_{\pi}G_f(1-A_v)}\]</span> The DC transimpedance gain is: <span class="math display">\[\frac{V_o}{I_i}=\frac{A_vR_{\pi}}{1+R_{\pi}G_f(1-A_v)}\]</span> For a large <span class="math inline">\(A_v\)</span>, this gain formula reduces to <span class="math inline">\(R_f\)</span>. From the perspective of <span class="math inline">\(C_\pi\)</span>, the circuit time constant is: <span class="math display">\[\tau_1=\frac{C_\pi}{g_m+g_\pi+G_lA_v}\]</span> From the perspective of <span class="math inline">\(C_l\)</span>, the time constant is: <span class="math display">\[\tau_2=\frac{C_l}{G_l+(1+\beta)(\frac{1}{R_f+R_\pi})}\]</span> The dominant pole then has a time constant of <span class="math inline">\(\tau=\tau_1+\tau_2\)</span>. The input noise current can be calculated from <span class="math inline">\(R_f\)</span>: <span class="math display">\[i_n^2=4kT\times F_{3dB}/R_f\]</span> where <span class="math inline">\(4kT=1.62\times10^{-20}\)</span> at 20 deg C. To account for additional resistors in parallel with <span class="math inline">\(R_f\)</span>, note that the noise current powers simply add.</p>
+<hr />
+</div>
+</div>
+<div id="audio-amplifier-stage-design" class="section level1">
+<h1>Audio Amplifier Stage Design</h1>
+<p>To convert the TIA output into an audio line level signal, use an appropriate audio amp IC:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Part Num</th>
+<th>Input Voltage Range</th>
+<th>Load Impedance</th>
+<th>1% THD Pout with Vdd=3.3 V</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>LM4818</td>
+<td>-0.3 V to VDD+0.3 V</td>
+<td>16 Ohms</td>
+<td>120 mW</td>
+</tr>
+</tbody>
+</table>
+<p>We want a large input resistance with respect to the BJT collector resistance and a moderate gain so that the LNA’s noise figure is dominant. For this, choose <span class="math inline">\(R_{in}=22\ k\Omega\)</span> and a gain of 3 V/V. It is desirable for the passband to omit 60 Hz (powerline frequency). Therefore, choose a bandwidth of 70 Hz to 20 kHz.</p>
+The general circuit for the LM4818 is:
+<center>
+<img src="tia-images/lm4818.png" id="id" class="class" style="width:50.0%;height:50.0%" />
+</center>
+<p><span class="math inline">\(R_i\)</span> is simply the desired input resistance (22 kOhms). Since <span class="math inline">\(A_v=2(R_f/R_i)\to 1.5=R_f/R_i\)</span>, <span class="math inline">\(R_f=33\ k\Omega\)</span>. Set the 3dB frequency of the <span class="math inline">\(R_i+C_i\)</span> high-pass element to <span class="math inline">\(0.2\times 70\ \textrm{Hz}\)</span>. Therefore, <span class="math inline">\(C_i&gt;0.517\ \textrm{uF}\)</span>. The resultant component values are:</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(R_i\)</span></th>
+<th><span class="math inline">\(R_f\)</span></th>
+<th><span class="math inline">\(f_l\)</span></th>
+<th><span class="math inline">\(f_h\)</span></th>
+<th><span class="math inline">\(C_i\)</span></th>
+<th>Required GBWP</th>
+<th><span class="math inline">\(C_B\)</span></th>
+<th><span class="math inline">\(C_{B2}\)</span></th>
+<th><span class="math inline">\(C_s\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(22\ k\Omega\)</span></td>
+<td><span class="math inline">\(33\ k\Omega\)</span></td>
+<td>14 Hz</td>
+<td>20 kHz</td>
+<td>0.56 uF</td>
+<td>300 kHz</td>
+<td>1 uF</td>
+<td>0.1 uF</td>
+<td>1 uF</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="lna-component-value-calculations" class="section level1">
+<h1>LNA Component Value Calculations</h1>
+In QucsStudio:
+<center>
+<img src="tia-images/bias_sim.png" id="id" class="class" style="width:50.0%;height:50.0%" />
+</center>
+In Excel/Libreoffice (using the small-signal analysis equations):
+<center>
+<img src="tia-images/excel.png" id="id" class="class" style="width:75.0%;height:75.0%" />
+</center>
+Monte Carlo Simulation (1000 runs):
+<center>
+<img src="tia-images/mc.png" id="id" class="class" style="width:60.0%;height:60.0%" />
+</center>
+<hr />
+</div>
+<div id="v-supply" class="section level1">
+<h1>3.3 V Supply</h1>
+<p>A 3.3 V LDO (TLV70033) was found on Digikey to supply the needed voltage.</p>
+<hr />
+</div>
+<div id="layout" class="section level1">
+<h1>Layout</h1>
+<div id="schematic" class="section level3">
+<h3>Schematic</h3>
+<center>
+<img src="tia-images/kicad_schema.png" id="id" class="class" style="width:60.0%;height:60.0%" />
+</center>
+</div>
+<div id="pcb" class="section level3">
+<h3>PCB</h3>
+<center>
+<img src="tia-images/pcb.png" id="id" class="class" style="width:60.0%;height:60.0%" />
+</center>
+<p>Note the usage of a grounded guard ring for shielding the input. The previous TIA design had a relatively high input resistance, increasing its sensitivity to E-field noise (which appears as a noise current in shunt with the input). Although this isn’t the case for the current revision of the circuit, it’s almost always better to shield high gain inputs.</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Simple Bipolar Power Supplies for Op-Amps</title>
+
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Yuyi Shen</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Projects
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="electronics.html">Electronics</a>
+    </li>
+    <li>
+      <a href="programming.html">Programming</a>
+    </li>
+    <li>
+      <a href="sciences.html">General Sciences</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="links.html">Interesting Links</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Simple Bipolar Power Supplies for Op-Amps</h1>
+
+</div>
+
+
+<hr />
+<div id="motivation" class="section level1">
+<h1>Motivation</h1>
+<center>
+<p><img src="rail-splitter-images/op-amp.png" id="id" class="class" style="width:20.0%;height:20.0%" /></p>
+</center>
+<p>Many op-amps are classified as dual-supply op-amps, which use a positive, and a negative voltage supply rail to allow their outputs to swing above and below ground. Generating a positive and a negative rail from a unipolar power supply like a normal 9V battery can be accomplished through a specialized power conversion circuit, such as a SMPS or charge pump. This page documents an example of both types of circuits.</p>
+</div>
+<div id="inverting-charge-pump" class="section level1">
+<h1>Inverting Charge Pump</h1>
+<center>
+<p><img src="rail-splitter-images/charge-pump.svg" id="id" class="class" style="width:100.0%;height:100.0%" /></p>
+</center>
+<p>One particularly simple, but inefficient way of generating a negative voltage rail from a positive voltage source is through an inverting charge pump. To develop a negative voltage, this circuit uses diodes to steer the square wave from a 555 timer oscillator into charging the output capacitor C3 with a negative voltage.</p>
+<center>
+<p><img src="rail-splitter-images/chargePump.jpg" id="id" class="class" style="width:40.0%;height:40.0%" /></p>
+</center>
+<p>I implemented the above schematic as written, save for Schottky diode D2. Because LtSpice simulations indicated that D2 would need to pass a significant amount of electrical current, I utilized a large 45V ~16A diode I found in CMU’s Robotics Club instead of the part listed in the schematic. To supply the 7.74V, I just used a LM7808 8V voltage regulator.</p>
+<p>This relatively compact circuit’s negative voltage falls to -3.67V when supplying 37 mA, and -5.68V when supplying roughly 5.7 mA. Because the positive voltage rail can be taken directly from the output of this circuit’s voltage regulator, the positive voltage of this circuit will remain relatively constant around 7.74V unless &gt;1A is drawn.</p>
+</div>
+<div id="inverting-buck-boost-converter" class="section level1">
+<h1>Inverting Buck-Boost Converter</h1>
+<center>
+<p><img src="rail-splitter-images/boost-converter.svg" id="id" class="class" style="width:100.0%;height:100.0%" /></p>
+</center>
+<p>Another method to generate the negative voltage required by a dual supply op-amp is through the usage of an inverting buck-boost converter. Although it is far more complex than a charge pump, it is more efficient and is capable of supplying much more power.</p>
+<p>One of the problems with utilizing the reactions of an inductor to generate a negative voltage is that the inductor generates short, tall spikes of negative voltage every time current through the inductor is switched on and off. This makes it very difficult to control the value of the negative voltage the inductor charges the output capacitor to. Therefore, the above circuit uses a Schmitt trigger to act as a feedback system for the converter (U2 in the schematic). When the voltage at the output capacitor goes below a certain amount, the Schmitt trigger turns off the 555. If the voltage goes above a specific reference voltage, the Schmitt trigger turns the 555 back on. This permits the converter to charge the output capacitor to a specific negative voltage, making the circuit somewhat more useful than the aforementioned inverting charge pump.</p>
+<center>
+<img src="rail-splitter-images/boostConverter.jpg" id="id" class="class" style="width:40.0%;height:40.0%" />
+</center>
+<p>I implemented the above schematic as written, save for the MOSFET, the diode, and the comparators marked U2 and U3. I used an IRF9540 for the MOSFET, the same type of 45V 16A Schottky diode used in the charge pump, and a LM2903 dual comparator for U2 and U3. To supply the 7.74V, I used yet another LM7808 8V regulator chip. As with the charge pump, I was able to pack the components into a rather small section of protoboard, although the larger number of components made it rather challenging. As a precaution, I added a small copper heat sink to the MOSFET.</p>
+<p>Compared to the charge pump, this circuit can deliver much more power. Its negative output can deliver 10.9 mA while maintaining a voltage of -10.8V, and roughly 102.6 mA while maintaining a voltage of -10.18V. As with the charge pump, the positive output’s voltage will remain fairly constant as it is taken directly from the output of the LM7808 voltage regulator.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
