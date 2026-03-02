@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Yuyi Shen’s Personal Projects and Work – Yuyi and Cats</title>
+<title>Low Noise Audio-Frequency Transimpedance Amplifier – Yuyi and Cats</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +23,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-fe01f165463d76921933ce8cf891317d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-fe01f165463d76921933ce8cf891317d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,10 +69,39 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -85,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -94,25 +123,25 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-things-i-do">    
         <li>
-    <a class="dropdown-item" href="./electronics.html">
+    <a class="dropdown-item" href="../electronics.html">
  <span class="dropdown-text">Electronics Projects</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./science.html">
+    <a class="dropdown-item" href="../science.html">
  <span class="dropdown-text">General Science Stuff</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./programming.html">
+    <a class="dropdown-item" href="../programming.html">
  <span class="dropdown-text">Old CS Projects</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">My Bio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./coollinks.html"> 
+    <a class="nav-link" href="../coollinks.html"> 
 <span class="menu-text">Other Sites to Check Out</span></a>
   </li>  
 </ul>
@@ -126,14 +155,13 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-    </div>
+    
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Yuyi Shen’s Personal Projects and Work</h1>
+<h1 class="title">Low Noise Audio-Frequency Transimpedance Amplifier</h1>
 </div>
 
 
@@ -150,48 +178,318 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="abstractblob">
+<p>After the failed testing of the transimpedance amplifier (TIA) designed for the <a href="../electroSubsites/fieldmill.html">field mill</a>, the design was revised for better noise performance.</p>
+<section id="device-selection-and-bias-point" class="level2">
+<h2 class="anchored" data-anchor-id="device-selection-and-bias-point">Device selection and bias point</h2>
+<p>A 2SC2714-O NPN transistor was selected as the gain element of the transimpedance stage for its 2.5 dB noise figure (measured at 100 MHz, <span class="math inline">\(I_e = 1 mA\)</span>). The specifications for this device are tabulated below.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 100%">
+<col style="width: 26%">
+<col style="width: 19%">
+<col style="width: 23%">
+<col style="width: 16%">
 </colgroup>
+<thead>
+<tr class="header">
+<th>Max <span class="math inline">\(V_{ce}\)</span> (V)</th>
+<th><span class="math inline">\(F_t\)</span> (MHz)</th>
+<th>Max <span class="math inline">\(I_c\)</span> (mA)</th>
+<th>hFe Range</th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td><h4 id="hiya-im-a-graduate-of-prof.-vanessa-chens-research-group-energy-efficient-circuits-and-systems-lab-at-carnegie-mellon-university-pittsburgh-pa-usa.-i-received-my-ph.d.-in-electrical-and-computer-engineering-in-aug.-2024.-my-research-focused-on-the-application-of-analog-rf-circuits-to-wireless-security-and-operation-under-cryogenic-temperatures.-im-currently-doing-a-working-holiday-in-australia-after-checking-out-british-columbia-and-scotland.-you-can-check-out-a-list-of-my-publications-below-along-with-some-links-to-my-personal-projects." class="anchored">Hiya! I’m a graduate of Prof.&nbsp;Vanessa Chen’s research group (Energy-Efficient Circuits and Systems Lab) at Carnegie Mellon University, Pittsburgh, PA, USA. I received my Ph.D.&nbsp;in Electrical and Computer Engineering in Aug.&nbsp;2024. My research focused on the application of analog RF circuits to wireless security and operation under cryogenic temperatures. I’m currently doing a working holiday in Australia after checking out British Columbia and Scotland. You can check out a list of my publications below along with some links to my personal projects.</h4></td>
+<td>30</td>
+<td>550</td>
+<td>20</td>
+<td>70-140</td>
+</tr>
+</tbody>
+</table>
+<p>The SPICE model is:</p>
+<pre><code>.MODEL 2SC2714 NPN( IS=1.45E-15 BF=166 NF=1.00 VAF=71 IKF=49E-3 ISE=43E-15 NE=2.45
+BR=5.33 NR=997E-3 VAR=22 IKR=69E-3 ISC=847E-18 NC=1.02 RB=14 IRB=1.00E-6 RBM=14
+RE=46E-3 RC=9.17 XTB=0.00 EG=1.11 eV XTI=3.00 CJE=1.66E-12 VJE=717E-3 MJE=331E-3
+TF=153E-12 XTF=100 VTF=383E-3 ITF=90E-3 PTF=47 CJC=781E-15 VJC=630E-3 MJC=462E-3
+XCJC=1.00 TR=1.00E-6 FC=900E-3)</code></pre>
+<p>A <span class="math inline">\(V_{cc}=3.3 V\)</span> is chosen for compatibility with 1.5V and 3.6V batteries. This will be supplied by a LDO (TLV70033). Since the BJT is only specified for 1 mA in the datasheet, a bias point of <span class="math inline">\(V_{ce}=2 V, I_c=1 mA\)</span> is chosen for an <span class="math inline">\(\approx 2 V_{pp}\)</span> output swing and a low noise figure. AppCad was used to calculate the collector-feedback bias circuit needed to achieve this DC bias point.</p>
+<div class="wallfixture">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 101%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><h3 id="appcad-window-for-bias-point-design" class="projectheader anchored">AppCad window for bias point design</h3></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="lnTIA-images/bias.png" class="img-fluid"></td>
 </tr>
 </tbody>
 </table>
 </div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><img src="index-images/freddy.jpg" class="img-fluid"></p>
-<p><span class="figlabel">Freddy is my fluffiest friend. Two of my brain cells are on indefinite loan to this loaf for operating his tail (pitch and yaw).</span></p>
-</div><div class="">
-<p><img src="index-images/junior.jpg" class="img-fluid"></p>
-<p><span class="figlabel">Junior is the latest addition to the family! Extraordinarily naughty and always wants his food right meow.</span></p>
-</div></div>
-<section id="publications" class="level3">
-<h3 class="anchored" data-anchor-id="publications">Publications</h3>
-<p>[1] Y. Shen, E. Chen and V. Chen, “A Current-Steering 6-GHz Power Amplifier With Extensive Reconfigurability for Cryogenic Operation in 65 nm CMOS,” in IEEE Open Journal of the Solid-State Circuits Society, vol.&nbsp;5, pp.&nbsp;497-510, 2025, doi: <a href="https://doi.org/10.1109/OJSSCS.2025.3631573">10.1109/OJSSCS.2025.3631573</a>.</p>
-<p>[2] J. Xu, J. Kan, Y. Shen, E. Chen and V. Chen, “A 0.45-mm² 3.49-TOPS/W Cryogenic Deep Reinforcement Learning Module for End-to-End Integrated Circuits Control,” in IEEE Open Journal of the Solid-State Circuits Society, vol.&nbsp;5, pp.&nbsp;240-250, 2025, doi: <a href="https://doi.org/10.1109/OJSSCS.2025.3601153">10.1109/OJSSCS.2025.3601153</a>.</p>
-<p>[3] E. Chen et al., “Dynamic Partial Reconfiguration of FPGAs for Energy-Efficient Machine Learning Inference in IoT Systems,” 2025 26th International Symposium on Quality Electronic Design (ISQED), San Francisco, CA, USA, 2025, pp.&nbsp;1-5, doi: <a href="https://doi.org/10.1109/ISQED65160.2025.11014371">10.1109/ISQED65160.2025.11014371</a>.</p>
-<p>[4] J. Xu, Y. Shen, J. Deng, E. Chen and V. Chen, “A Reinforcement-Learning-Assisted Power Amplifier for RF Fingerprint Generation in 65 nm CMOS,” in IEEE Transactions on Circuits and Systems I: Regular Papers, vol.&nbsp;71, no. 7, pp.&nbsp;3050-3063, July 2024, doi: <a href="https://doi.org/10.1109/TCSI.2024.3390694">10.1109/TCSI.2024.3390694</a>.</p>
-<p>[5] J. Wang et al., “Wireless Actuation for Soft Electronics-free Robots,” in Proceedings of the 29th Annual International Conference on Mobile Computing and Networking, New York, NY, USA: Association for Computing Machinery, 2023.</p>
-<p>[6] J. Xu, Y. Shen, J. Yi, E. Chen and V. Chen, “Deep Reinforcement Learning on FPGA for Self-Healing Cryogenic Power Amplifier Control,” in IEEE Open Journal of Circuits and Systems, vol.&nbsp;4, pp.&nbsp;176-187, 2023, doi: <a href="https://doi.org/10.1109/OJCAS.2023.3282929">10.1109/OJCAS.2023.3282929</a>.</p>
-<p>[7] V. Chen, J. Xu, Y. Shen and E. Chen, “RF Fingerprint Classification With Combinatorial-Randomness-Based Power Amplifiers and Convolutional Neural Networks: Secure analog/RF electronics and electromagnetics,” in IEEE Solid-State Circuits Magazine, vol.&nbsp;14, no. 4, pp.&nbsp;28-36, Fall 2022, doi: <a href="https://doi.org/10.1109/MSSC.2022.3200302">10.1109/MSSC.2022.3200302</a>.</p>
-<p>[8] J. Kan, Y. Shen, J. Xu, E. Chen, J. Zhu and V. Chen, “RF Analog Hardware Trojan Detection Through Electromagnetic Side-Channel,” in IEEE Open Journal of Circuits and Systems, vol.&nbsp;3, pp.&nbsp;237-251, 2022, doi: <a href="https://doi.org/10.1109/OJCAS.2022.3210163">10.1109/OJCAS.2022.3210163</a>.</p>
-<p>[9] Y. Shen, J. Xu, J. Yi, E. Chen and V. Chen, “Class-E Power Amplifiers Incorporating Fingerprint Augmentation With Combinatorial Security Primitives for Machine-Learning-Based Authentication in 65 nm CMOS,” in IEEE Transactions on Circuits and Systems I: Regular Papers, vol.&nbsp;69, no. 5, pp.&nbsp;1896-1909, May 2022, doi: <a href="https://doi.org/10.1109/TCSI.2022.3141336">10.1109/TCSI.2022.3141336</a>.</p>
-<p>[10] J. Xu, Y. Shen, E. Chen and V. Chen, “Bayesian Neural Networks for Identification and Classification of Radio Frequency Transmitters Using Power Amplifiers’ Nonlinearity Signatures,” in IEEE Open Journal of Circuits and Systems, vol.&nbsp;2, pp.&nbsp;457-471, 2021, doi: <a href="https://doi.org/10.1109/OJCAS.2021.3089499">10.1109/OJCAS.2021.3089499</a>.</p>
-<p>[11] A. Kochhar, A. Mahmoud, Y. Shen, N. Turumella and G. Piazza, “X-Cut Lithium Niobate-Based Shear Horizontal Resonators for Radio Frequency Applications,” in Journal of Microelectromechanical Systems, vol.&nbsp;29, no. 6, pp.&nbsp;1464-1472, Dec.&nbsp;2020, doi: <a href="https://doi.org/10.1109/JMEMS.2020.3026167">10.1109/JMEMS.2020.3026167</a>.</p>
-<div class="bottomblob">
+</section>
+<section id="small-signal-analysis-of-tia-stage" class="level2">
+<h2 class="anchored" data-anchor-id="small-signal-analysis-of-tia-stage">Small signal analysis of TIA stage</h2>
+<p>The tabulated hybrid-<span class="math inline">\(\pi\)</span> model for the chosen BJT is listed below.</p>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 41%">
+<col style="width: 23%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(g_m\)</span> (<span class="math inline">\(\text{mOhms}^{-1}\)</span>)</th>
+<th><span class="math inline">\(C_{\pi}\)</span> (pF)</th>
+<th><span class="math inline">\(R_{\pi}\)</span> Range (Ohms)</th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><h3 id="links-to-personal-projects" class="anchored">Links to Personal Projects</h3>
-<p><a href="./electronics.html">Electronics projects</a></p>
-<p><a href="./science.html">General science projects</a></p>
-<p><a href="./programming.html">Old programming projects from undergrad</a></p>
-<h3 id="some-cool-websites-ive-run-into." class="anchored"><a href="./coollinks.html">Some cool websites I’ve run into.</a></h3></td>
+<td>38.4</td>
+<td>11</td>
+<td>1822-3645</td>
+</tr>
+</tbody>
+</table>
+<p>Supposing the transistor is placed in a shunt-feedback topology, the resultant schematic can be drawn out as below.</p>
+<div class="wallfixture">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 101%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><h3 id="tia-stage-schematic-for-small-signal-analysis" class="projectheader anchored">TIA stage schematic for small-signal analysis</h3></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="lnTIA-images/circuit.png" class="img-fluid"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For this circuit, the following parameters can be calculated at the outset. Here, <span class="math inline">\(A_v\)</span> represents the voltage gain of the circuit and <span class="math inline">\(G\)</span> variables represent conductance.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 30%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>DC voltage gain</th>
+<th>Input resistance</th>
+<th>DC transimpedance gain</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\frac{V_o}{V_i}=\frac{G_f-g_m}{G_f+G_l}\)</span></td>
+<td><span class="math inline">\(R_{in}=\frac{R_{\pi}}{1+R_{\pi}G_f(1-A_v)}\)</span></td>
+<td><span class="math inline">\(\frac{V_o}{I_{in}}=\frac{A_vR_{\pi}}{1+R_{\pi}G_f(1-A_v)}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>For a large <span class="math inline">\(A_v\)</span>, the DC transimpedance gain reduces to <span class="math inline">\(R_f\)</span>. The following time constant analysis gives the dominant pole time constant.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Circuit time constant from <span class="math inline">\(C_\pi\)</span></th>
+<th>Circuit time constant from <span class="math inline">\(C_l\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\tau_1=\frac{C_{\pi}}{g_m+g_\pi+G_lA_v}\)</span></td>
+<td><span class="math inline">\(\tau_2=\frac{C_l}{G_l+(1+\beta)(\frac{1}{R_f+R_\pi})}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The dominant pole then has a time constant of <span class="math inline">\(\tau=\tau_1+\tau_2\)</span>.</p>
+<p>For noise analysis, the input noise current is simply <span class="math inline">\(i_n^2=4kTF_{3dB}/R_f\)</span> where <span class="math inline">\(4kT=1.62e-20\)</span> at 20 C.</p>
+</section>
+<section id="audio-amplifier-stage-design" class="level2">
+<h2 class="anchored" data-anchor-id="audio-amplifier-stage-design">Audio amplifier stage design</h2>
+<p>An audio amplifier stage is required to convert the TIA output into an audio line level signal. For this purpose, the LM4818 IC was chosen. The specs for this chip are tabulated below.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 35%">
+<col style="width: 19%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Input Voltage Range</th>
+<th>Load Impedance</th>
+<th>1% THD Output Power (<span class="math inline">\(V_{dd}=3.3V\)</span>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(-0.3 V \to \text{VDD}+0.3V\)</span></td>
+<td>16 Ohms</td>
+<td>120 mW</td>
+</tr>
+</tbody>
+</table>
+<p>To ensure that the low-noise TIA stage’s noise figure is dominant, the audio amp stage needs a moderate gain and a large input resistance relative to the TIA BJT’s collector resistance. The passband should also omit 60 Hz (the power line frequency). Therefore, a gain of <span class="math inline">\(3 V/V\)</span>, <span class="math inline">\(R_{in}=22 k\Omega\)</span>, and bandwidth of <span class="math inline">\(70 Hz\to 20 kHz\)</span> are chosen.</p>
+<p>The typical application circuit for the LM4818 is shown below.</p>
+<div class="wallfixture">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 101%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><h3 id="example-design-for-lm4818" class="projectheader anchored">Example design for LM4818</h3></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="lnTIA-images/lm4818.png" class="img-fluid"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span class="math inline">\(R_i\)</span> is set to the desired input resistance of <span class="math inline">\(22 k\Omega\)</span>. <span class="math inline">\(R_f\)</span> can be calculated with <span class="math inline">\(A_v=2\frac{R_f}{R_i}\)</span>, resulting in <span class="math inline">\(R_f=33 k\Omega\)</span>. To select the desired high pass frequency, the 3dB frequency of the high-pass element formed by <span class="math inline">\(R_i\)</span> and <span class="math inline">\(C_i\)</span> is set to <span class="math inline">\(0.2\times 70 Hz\)</span>. Therefore, <span class="math inline">\(C_i &gt; 0.517 uF\)</span>. The resultant component values for this stage are then:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 11%">
+<col style="width: 13%">
+<col style="width: 7%">
+<col style="width: 11%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(R_i\)</span></th>
+<th><span class="math inline">\(R_f\)</span></th>
+<th><span class="math inline">\(f_l\)</span></th>
+<th><span class="math inline">\(f_h\)</span></th>
+<th><span class="math inline">\(C_i\)</span></th>
+<th>GBWP spec</th>
+<th><span class="math inline">\(C_B\)</span></th>
+<th><span class="math inline">\(C_{B2}\)</span></th>
+<th><span class="math inline">\(C_s\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>22 kOhm</td>
+<td>33 kOhm</td>
+<td>14 Hz</td>
+<td>20 kHz</td>
+<td>0.56 uF</td>
+<td>300 kHz</td>
+<td>1 uF</td>
+<td>0.1 uF</td>
+<td>1 uF</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tia-component-value-calculations" class="level2">
+<h2 class="anchored" data-anchor-id="tia-component-value-calculations">TIA Component Value Calculations</h2>
+<p>The DC bias sim in QucsStudio was used to verify the calculated component values.</p>
+<div class="wallfixture">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 101%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><h3 id="simulated-dc-operating-point" class="projectheader anchored">Simulated DC operating point</h3></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="lnTIA-images/bias_sim.png" class="img-fluid"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The below Libreoffice spreadsheet was used to conduct the small-signal analysis.</p>
+<div class="wallfixture">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 101%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><h3 id="small-signal-spreadsheet-calculations" class="projectheader anchored">Small signal spreadsheet calculations</h3></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="lnTIA-images/excel.png" class="img-fluid"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A Monte Carlo sim with 1000 runs was conducted as verification of the design.</p>
+<div class="wallfixture">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 101%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><h3 id="verification-with-monte-carlo-sim" class="projectheader anchored">Verification with Monte Carlo sim</h3></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="lnTIA-images/mc.png" class="img-fluid"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="kicad-pcb-layout" class="level2">
+<h2 class="anchored" data-anchor-id="kicad-pcb-layout">Kicad PCB Layout</h2>
+<div class="wallfixture">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 101%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><h3 id="kicad-schematic" class="projectheader anchored">Kicad schematic</h3></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="lnTIA-images/kicad_schema.png" class="img-fluid"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="wallfixture">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 101%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><h3 id="kicad-board-layout" class="projectheader anchored">Kicad board layout</h3></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="lnTIA-images/pcb.png" class="img-fluid"></td>
 </tr>
 </tbody>
 </table>

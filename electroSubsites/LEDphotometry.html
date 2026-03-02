@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Yuyi Shen’s Personal Projects and Work – Yuyi and Cats</title>
+<title>Notes on LED Photometry – Yuyi and Cats</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +23,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-fe01f165463d76921933ce8cf891317d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-fe01f165463d76921933ce8cf891317d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,10 +69,39 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -85,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -94,25 +123,25 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-things-i-do">    
         <li>
-    <a class="dropdown-item" href="./electronics.html">
+    <a class="dropdown-item" href="../electronics.html">
  <span class="dropdown-text">Electronics Projects</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./science.html">
+    <a class="dropdown-item" href="../science.html">
  <span class="dropdown-text">General Science Stuff</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./programming.html">
+    <a class="dropdown-item" href="../programming.html">
  <span class="dropdown-text">Old CS Projects</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">My Bio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./coollinks.html"> 
+    <a class="nav-link" href="../coollinks.html"> 
 <span class="menu-text">Other Sites to Check Out</span></a>
   </li>  
 </ul>
@@ -126,14 +155,13 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-    </div>
+    
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Yuyi Shen’s Personal Projects and Work</h1>
+<h1 class="title">Notes on LED Photometry</h1>
 </div>
 
 
@@ -150,54 +178,159 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="abstractblob">
+<p>Note: much of the information on this page is taken from the book <a href="https://www.altostratus.it/Articles/2012_Di_Justo_Arduino.pdf">Atmospheric Monitoring with Arduino</a>.</p>
+<section id="photocurrent-measurement-with-a-basic-time-to-digital-converter" class="level2">
+<h2 class="anchored" data-anchor-id="photocurrent-measurement-with-a-basic-time-to-digital-converter">Photocurrent measurement with a basic time-to-digital converter</h2>
+<p>LED photocurrent for photometry applications can be measured with a rudimentary time-to-digital converter (TDC). The schematic for the front-end of such a circuit is shown below.</p>
+<div class="wallfixture">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 100%">
+<col style="width: 101%">
 </colgroup>
+<thead>
+<tr class="header">
+<th><h3 id="offset-cancelling-charge-sensitive-detector" class="projectheader anchored">Offset cancelling charge-sensitive detector</h3></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td><h4 id="hiya-im-a-graduate-of-prof.-vanessa-chens-research-group-energy-efficient-circuits-and-systems-lab-at-carnegie-mellon-university-pittsburgh-pa-usa.-i-received-my-ph.d.-in-electrical-and-computer-engineering-in-aug.-2024.-my-research-focused-on-the-application-of-analog-rf-circuits-to-wireless-security-and-operation-under-cryogenic-temperatures.-im-currently-doing-a-working-holiday-in-australia-after-checking-out-british-columbia-and-scotland.-you-can-check-out-a-list-of-my-publications-below-along-with-some-links-to-my-personal-projects." class="anchored">Hiya! I’m a graduate of Prof.&nbsp;Vanessa Chen’s research group (Energy-Efficient Circuits and Systems Lab) at Carnegie Mellon University, Pittsburgh, PA, USA. I received my Ph.D.&nbsp;in Electrical and Computer Engineering in Aug.&nbsp;2024. My research focused on the application of analog RF circuits to wireless security and operation under cryogenic temperatures. I’m currently doing a working holiday in Australia after checking out British Columbia and Scotland. You can check out a list of my publications below along with some links to my personal projects.</h4></td>
+<td><img src="LED-images/afe.png" class="img-fluid"></td>
+</tr>
+<tr class="even">
+<td>When CLK2 is high, the charge on the cap is reset to <span class="math inline">\(−C_{int}V_{off}\)</span>. When CLK1 is high, this initial charge is canceled out and the output voltage becomes <span class="math inline">\(V_{out}=\frac{I_{photo}}{C_{int}}t\)</span>.</td>
 </tr>
 </tbody>
 </table>
 </div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><img src="index-images/freddy.jpg" class="img-fluid"></p>
-<p><span class="figlabel">Freddy is my fluffiest friend. Two of my brain cells are on indefinite loan to this loaf for operating his tail (pitch and yaw).</span></p>
-</div><div class="">
-<p><img src="index-images/junior.jpg" class="img-fluid"></p>
-<p><span class="figlabel">Junior is the latest addition to the family! Extraordinarily naughty and always wants his food right meow.</span></p>
-</div></div>
-<section id="publications" class="level3">
-<h3 class="anchored" data-anchor-id="publications">Publications</h3>
-<p>[1] Y. Shen, E. Chen and V. Chen, “A Current-Steering 6-GHz Power Amplifier With Extensive Reconfigurability for Cryogenic Operation in 65 nm CMOS,” in IEEE Open Journal of the Solid-State Circuits Society, vol.&nbsp;5, pp.&nbsp;497-510, 2025, doi: <a href="https://doi.org/10.1109/OJSSCS.2025.3631573">10.1109/OJSSCS.2025.3631573</a>.</p>
-<p>[2] J. Xu, J. Kan, Y. Shen, E. Chen and V. Chen, “A 0.45-mm² 3.49-TOPS/W Cryogenic Deep Reinforcement Learning Module for End-to-End Integrated Circuits Control,” in IEEE Open Journal of the Solid-State Circuits Society, vol.&nbsp;5, pp.&nbsp;240-250, 2025, doi: <a href="https://doi.org/10.1109/OJSSCS.2025.3601153">10.1109/OJSSCS.2025.3601153</a>.</p>
-<p>[3] E. Chen et al., “Dynamic Partial Reconfiguration of FPGAs for Energy-Efficient Machine Learning Inference in IoT Systems,” 2025 26th International Symposium on Quality Electronic Design (ISQED), San Francisco, CA, USA, 2025, pp.&nbsp;1-5, doi: <a href="https://doi.org/10.1109/ISQED65160.2025.11014371">10.1109/ISQED65160.2025.11014371</a>.</p>
-<p>[4] J. Xu, Y. Shen, J. Deng, E. Chen and V. Chen, “A Reinforcement-Learning-Assisted Power Amplifier for RF Fingerprint Generation in 65 nm CMOS,” in IEEE Transactions on Circuits and Systems I: Regular Papers, vol.&nbsp;71, no. 7, pp.&nbsp;3050-3063, July 2024, doi: <a href="https://doi.org/10.1109/TCSI.2024.3390694">10.1109/TCSI.2024.3390694</a>.</p>
-<p>[5] J. Wang et al., “Wireless Actuation for Soft Electronics-free Robots,” in Proceedings of the 29th Annual International Conference on Mobile Computing and Networking, New York, NY, USA: Association for Computing Machinery, 2023.</p>
-<p>[6] J. Xu, Y. Shen, J. Yi, E. Chen and V. Chen, “Deep Reinforcement Learning on FPGA for Self-Healing Cryogenic Power Amplifier Control,” in IEEE Open Journal of Circuits and Systems, vol.&nbsp;4, pp.&nbsp;176-187, 2023, doi: <a href="https://doi.org/10.1109/OJCAS.2023.3282929">10.1109/OJCAS.2023.3282929</a>.</p>
-<p>[7] V. Chen, J. Xu, Y. Shen and E. Chen, “RF Fingerprint Classification With Combinatorial-Randomness-Based Power Amplifiers and Convolutional Neural Networks: Secure analog/RF electronics and electromagnetics,” in IEEE Solid-State Circuits Magazine, vol.&nbsp;14, no. 4, pp.&nbsp;28-36, Fall 2022, doi: <a href="https://doi.org/10.1109/MSSC.2022.3200302">10.1109/MSSC.2022.3200302</a>.</p>
-<p>[8] J. Kan, Y. Shen, J. Xu, E. Chen, J. Zhu and V. Chen, “RF Analog Hardware Trojan Detection Through Electromagnetic Side-Channel,” in IEEE Open Journal of Circuits and Systems, vol.&nbsp;3, pp.&nbsp;237-251, 2022, doi: <a href="https://doi.org/10.1109/OJCAS.2022.3210163">10.1109/OJCAS.2022.3210163</a>.</p>
-<p>[9] Y. Shen, J. Xu, J. Yi, E. Chen and V. Chen, “Class-E Power Amplifiers Incorporating Fingerprint Augmentation With Combinatorial Security Primitives for Machine-Learning-Based Authentication in 65 nm CMOS,” in IEEE Transactions on Circuits and Systems I: Regular Papers, vol.&nbsp;69, no. 5, pp.&nbsp;1896-1909, May 2022, doi: <a href="https://doi.org/10.1109/TCSI.2022.3141336">10.1109/TCSI.2022.3141336</a>.</p>
-<p>[10] J. Xu, Y. Shen, E. Chen and V. Chen, “Bayesian Neural Networks for Identification and Classification of Radio Frequency Transmitters Using Power Amplifiers’ Nonlinearity Signatures,” in IEEE Open Journal of Circuits and Systems, vol.&nbsp;2, pp.&nbsp;457-471, 2021, doi: <a href="https://doi.org/10.1109/OJCAS.2021.3089499">10.1109/OJCAS.2021.3089499</a>.</p>
-<p>[11] A. Kochhar, A. Mahmoud, Y. Shen, N. Turumella and G. Piazza, “X-Cut Lithium Niobate-Based Shear Horizontal Resonators for Radio Frequency Applications,” in Journal of Microelectromechanical Systems, vol.&nbsp;29, no. 6, pp.&nbsp;1464-1472, Dec.&nbsp;2020, doi: <a href="https://doi.org/10.1109/JMEMS.2020.3026167">10.1109/JMEMS.2020.3026167</a>.</p>
-<div class="bottomblob">
+<p>The parasitic capacitance at the op-amp inverting input has a negligible effect, and any random offset from the op-amp is canceled out. Switches can be implemented with the CD4016B IC, and must be driven using a non-overlapping clock generator. The schematic for one such generator is displayed.</p>
+<div class="wallfixture">
 <table class="caption-top table">
+<colgroup>
+<col style="width: 101%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><h3 id="non-overlapping-clock-generator" class="projectheader anchored">Non-overlapping clock generator</h3></th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><h3 id="links-to-personal-projects" class="anchored">Links to Personal Projects</h3>
-<p><a href="./electronics.html">Electronics projects</a></p>
-<p><a href="./science.html">General science projects</a></p>
-<p><a href="./programming.html">Old programming projects from undergrad</a></p>
-<h3 id="some-cool-websites-ive-run-into." class="anchored"><a href="./coollinks.html">Some cool websites I’ve run into.</a></h3></td>
+<td><img src="LED-images/clockgen.png" class="img-fluid"></td>
+</tr>
+<tr class="even">
+<td>This clock generator can be implemented with a hex inverter and 2 NOR gates.</td>
 </tr>
 </tbody>
 </table>
 </div>
+<p>The analog output of this front-end can be fed into a back-end circuit that generates edges for counting by a microcontroller like the ATTINY85. The schematic is displayed below.</p>
+<div class="wallfixture">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 101%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><h3 id="tdc-back-end" class="projectheader anchored">TDC Back-end</h3></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="LED-images/tdc.png" class="img-fluid"></td>
+</tr>
+<tr class="even">
+<td>The output voltage from the analog front end is fed into the inverting input of the comparator and used to enable a ring oscillator whose edges can be counted. The capacitor <span class="math inline">\(C_h\)</span> is simply present to hold the inverting input voltage at ground when CLK2 and CLK1 are both low, and the REF is simply a voltage reference IC. The rising edge of CLK2 serves as a valid signal for the edge counter.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="photometer-calibration-procedure" class="level2">
+<h2 class="anchored" data-anchor-id="photometer-calibration-procedure">Photometer calibration procedure</h2>
+<p>Since photometer sensors are meant to be pointed directly at the Sun during measurements, it may help to build aligning tools into the photometer casing. Otherwise, use noon measurements when the Sun is highest. Measurement times must be recorded.</p>
+<p>The specific position of the Sun at noon changes as the Earth orbits the Sun. Because the sunlight is passing through a different amount of air mass at different points in the year, photometric measurements are significantly impacted and thus must be calibrated to atmospheric optical thickness (AOT).</p>
+<p>Air mass is simply defined as <span class="math inline">\(m=1/sin(\theta)\)</span> where <span class="math inline">\(\theta\)</span> is the angle of the sun above the horizon. This quantity can be calculated from location and time, or directly measured with a clinometer. The change in air mass over the course of the year can be de-embedded by calculating the AOT. AOT gives the air clarity for any given air mass (the true reading of the photometer) and can be found with Langley extrapolation.</p>
+<p>The steps for AOT calculation are as follows.</p>
+<ol type="1">
+<li>Wait for a very clear day (constant humidity, no cloud cover, no atmospheric haze). Alternatively, wait for an overcast day with uniform cloud cover.</li>
+<li>Take measurements every half hour for half of the daylight hours (dawn to noon or noon to sunset).</li>
+<li>Measure the sun’s angle above the horizon at each measurement.</li>
+<li>Plot the log of the LED data on the y-axis against the air mass on the x-axis.</li>
+<li>Extrapolate linearly to find the y-intercept where the airmass is zero, the extraterrestrial constant (EC).</li>
+<li>The EC serves as a calibration constant specific to the photometer.</li>
+<li>Calculate AOT using the EC: <span class="math display">\[AOT=\frac{1}{m}\frac{\log(EC)}{\log(LEDdata)}\]</span></li>
+</ol>
+</section>
+<section id="applications-of-photometry" class="level2">
+<h2 class="anchored" data-anchor-id="applications-of-photometry">Applications of photometry</h2>
+<section id="photosynthetically-active-radiation-par" class="level3">
+<h3 class="anchored" data-anchor-id="photosynthetically-active-radiation-par">Photosynthetically active radiation (PAR)</h3>
+<p>PAR refers to the blue and red light available for photosynthesis by plants. Summing the readings from a blue and red LED gives the PAR.</p>
+</section>
+<section id="atmospheric-haze" class="level3">
+<h3 class="anchored" data-anchor-id="atmospheric-haze">Atmospheric haze</h3>
+<p>Atmospheric haze is produced by aerosols which are more effective at scattering higher frequencies of light. The difference between the photocurrents of a red and green LED thus gives the level of haze at time of measurement.</p>
+</section>
+<section id="water-vapor" class="level3">
+<h3 class="anchored" data-anchor-id="water-vapor">Water vapor</h3>
+<div class="wallfixture">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 101%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><h3 id="absorption-spectra-for-different-phases-of-water" class="projectheader anchored">Absorption spectra for different phases of water</h3></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="LED-images/waterabsorptionspectrum.png" class="img-fluid"></td>
+</tr>
+<tr class="even">
+<td>Ustin, Susan &amp; Riaño, David &amp; Hunt, E.. (2012). Estimating canopy water content from spectroscopy. Israel Journal of Plant Sciences. 60. 10.1560/IJPS.60.1-2.9.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Water vapor has an absorption band around 940 nm. Comparing the output of a 940 nm LED against a 880 nm LED gives the amount of water vapor in the atmosphere. Because of the high dependence of water vapor on local weather (clouds, raining, snowing), better results can be obtained for measurements of upper atmospheric water vapor (above the weather) on clear days.</p>
+</section>
+<section id="ozone-levels" class="level3">
+<h3 class="anchored" data-anchor-id="ozone-levels">Ozone levels</h3>
+<div class="wallfixture">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 101%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><h3 id="ozone-absorption-spectrum" class="projectheader anchored">Ozone absorption spectrum</h3></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="LED-images/ozoneabsorptionspectrum.png" class="img-fluid"></td>
+</tr>
+<tr class="even">
+<td>K Bogumil, J Orphal, J.P Burrows, J.M Flaud, Vibrational progressions in the visible and near-ultraviolet absorption spectrum of ozone, Chemical Physics Letters, Volume 349, Issues 3–4, 2001, Pages 241-248, ISSN 0009-2614, https://doi.org/10.1016/S0009-2614(01)01191-5.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Taking the ratio of the readings from a 589 nm yellow LED and a 660 nm red LED (one with a response near the Chappuis band, and one with a peak freq. above it) gives ambient ozone levels.</p>
+</section>
+<section id="twilight-haze" class="level3">
+<h3 class="anchored" data-anchor-id="twilight-haze"><a href="https://makezine.com/projects/twilight-photometer">Twilight haze</a></h3>
+<p>The “twilight intensity” measured at any given time by the photometer correlates with the “height” of Earth’s shadow. For a measurement at sunset, the photometer measures the reduction in light as the sun sinks below the horizon. The reverse is true for a measurement conducted at sunrise.</p>
+<p>The height of Earth’s shadow can be calculated from the geographical location and elevation at any given time. Plotting this on the y-axis against the intensity measured by the photometer gives an idea of the heights at which there are significant concentrations of aerosols with dips in the measured intensity. Taking the derivative of the intensity before plotting serves to emphasize seemingly insignificant changes.</p>
+<p>This measurement requires a 660 nm or 880 nm LED and a photometer with a wide dynamic range. The procedure is as follows:</p>
+<ol type="1">
+<li>10 minutes before sunset or 45 minutes before sunrise on a clear day, lay the photometer facing straight up on a level surface outdoors away from light sources.</li>
+<li>Record data at 1-second intervals.</li>
+</ol>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
